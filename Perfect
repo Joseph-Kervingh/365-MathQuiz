@@ -1,11 +1,17 @@
 using System;
 
+using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace KervingJoseph_MathQuiz
 {
     public partial class Form1 : Form
-    {
+        {
+
+        string date;
+        
+
         // Create a Random object called randomizer 
         // to generate random numbers.
         Random randomizer = new Random();
@@ -87,6 +93,13 @@ namespace KervingJoseph_MathQuiz
         public Form1()
         {
             InitializeComponent();
+            
+            {
+
+                date = DateTime.Now.ToString("dd MMMM yyyy");
+                DateS.Text = date;
+            }
+
         }
 
         private void timeLabel_Click(object sender, EventArgs e)
@@ -106,7 +119,7 @@ namespace KervingJoseph_MathQuiz
                                 "Congratulations!");
                 startButton.Enabled = true;
             }
-            else if (timeLeft > 0)
+            else if (timeLeft > 5)
             {
                 // If CheckTheAnswer() return false, keep counting
                 // down. Decrease the time left by one second and 
@@ -114,7 +127,18 @@ namespace KervingJoseph_MathQuiz
                 // Time Left label.
                 timeLeft--;
                 timeLabel.Text = timeLeft + " seconds";
+
             }
+
+            else if (timeLeft > 0)
+            {
+                timeLabel.BackColor = Color.Red;
+                timeLeft--;
+                timeLabel.Text = timeLeft + " seconds";
+            }
+
+
+
             else
             {
                 // If the user ran out of time, stop the timer, show 
@@ -127,10 +151,14 @@ namespace KervingJoseph_MathQuiz
                 product.Value = multiplicand * multiplier;
                 quotient.Value = dividend / divisor;
                 startButton.Enabled = true;
+                timeLabel.BackColor = DefaultBackColor;
+
             }
+
+
         }
 
-    
+
 
         /// Check the answer to see if the user got everything right.
         /// </summary>
@@ -171,6 +199,64 @@ namespace KervingJoseph_MathQuiz
                 }
             }
         }
+
+
+
+        private void sum_ValueChanged(object sender, EventArgs e)
+        { 
+            if (addend1 + addend2 == sum.Value)
+            {
+                SoundPlayer player = new 
+                SoundPlayer(@"C:\Users\Namfield\Music\SoundQuiz.wav");
+                player.Play();
+            }
+            else
+            {
+                
+            }
+        }
+
+        private void difference_ValueChanged(object sender, EventArgs e)
+        {
+            if (minuend - subtrahend == difference.Value)
+            {
+                SoundPlayer player = new
+                 SoundPlayer(@"C:\Users\Namfield\Music\SoundQuiz.wav");
+                player.Play();
+            }
+            else
+            {
+            }
+        }
+
+        private void product_ValueChanged(object sender, EventArgs e)
+        {
+            if (multiplicand * multiplier == product.Value)
+            {
+                SoundPlayer player = new
+                SoundPlayer(@"C:\Users\Namfield\Music\SoundQuiz.wav");
+                player.Play();
+            }
+            else
+            {
+                
+            }
+        }
+
+        private void quotient_ValueChanged(object sender, EventArgs e)
+        {
+            if (dividend / divisor == quotient.Value)
+            {
+                SoundPlayer player = new
+                SoundPlayer(@"C:\Users\Namfield\Music\SoundQuiz.wav");
+                player.Play();
+            }
+            else
+            {
+               
+            }
+        }
+
     }
 }
 
