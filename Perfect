@@ -257,6 +257,12 @@ namespace KervingJoseph_MathQuiz
             }
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }  
+
     }
 }
+
 
